@@ -248,6 +248,10 @@ int partition_publish(const char *device, off_t offset)
 				partdev->label = strdup((char*)name);
 				partdev->is_gpt = true;
 
+				/* Some linux distros make use of subpartitions.
+				 * Scan devices recursively to publish them. */
+				partition_publish(subdevice, 0);
+
 				count++;
 			}
 		}
