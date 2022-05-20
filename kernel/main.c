@@ -35,6 +35,9 @@
 #include <kernel/dpc.h>
 #include <boot_stats.h>
 
+#include <lib/bio.h>
+#include <lib/fs.h>
+
 extern void *__ctor_list;
 extern void *__ctor_end;
 extern int __bss_start;
