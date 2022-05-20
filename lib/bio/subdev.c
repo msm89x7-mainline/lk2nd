@@ -98,6 +98,10 @@ status_t bio_publish_subdevice(const char *parent_dev, const char *subdev, bnum_
 	sub->parent = parent;
 	sub->offset = startblock;
 
+	/* Only mark leaf devices as subdev if there are subpartitions */
+	parent->is_subdev = false;
+	sub->dev.is_subdev = true;
+
 	sub->dev.read = &subdev_read;
 	sub->dev.read_block = &subdev_read_block;
 	sub->dev.write = &subdev_write;
