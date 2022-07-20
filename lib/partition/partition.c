@@ -132,10 +132,10 @@ int partition_publish(const char *device, off_t offset)
 		struct mbr_part part[4];
 		memcpy(part, buf + 446, sizeof(part));
 
-#if DEBUGLEVEL >= INFO
-		dprintf(INFO, "mbr partition table dump:\n");
+#if DEBUGLEVEL >= SPEW
+		dprintf(SPEW, "mbr partition table dump:\n");
 		for (i=0; i < 4; i++) {
-			dprintf(INFO, "\t%i: status 0x%hhx, type 0x%hhx, start 0x%x, len 0x%x\n", i, part[i].status, part[i].type, part[i].lba_start, part[i].lba_length);
+			dprintf(SPEW, "\t%i: status 0x%hhx, type 0x%hhx, start 0x%x, len 0x%x\n", i, part[i].status, part[i].type, part[i].lba_start, part[i].lba_length);
 		}
 #endif
 
@@ -163,7 +163,7 @@ int partition_publish(const char *device, off_t offset)
 		}
 
 		if(!gpt_partitions_exist) break;
-		dprintf(INFO, "found GPT\n");
+		dprintf(SPEW, "found GPT\n");
 
 		err = bio_read(dev, buf, offset + dev->block_size, dev->block_size);
 		if (err < 0)
