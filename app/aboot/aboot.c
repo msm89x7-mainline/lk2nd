@@ -105,6 +105,9 @@
 #if WITH_LK2ND_DISPLAY_MENU
 #include <lk2nd/menu.h>
 #endif
+#if WITH_LK2ND_BOOT
+#include <lk2nd/boot.h>
+#endif
 
 extern  bool target_use_signed_kernel(void);
 extern void platform_uninit(void);
@@ -5632,6 +5635,11 @@ void aboot_init(const struct app_descriptor *app)
 normal_boot:
 	if (!boot_into_fastboot)
 	{
+#if WITH_LK2ND_BOOT
+		if (!boot_into_recovery)
+			lk2nd_boot();
+#endif
+
 		if (target_is_emmc_boot())
 		{
 			if(!IS_ENABLED(ABOOT_STANDALONE) && emmc_recovery_init())

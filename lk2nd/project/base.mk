@@ -16,6 +16,7 @@ GPL ?= 1
 
 MODULES += \
 	lk2nd \
+	lk2nd/boot \
 	lk2nd/fastboot \
 	lk2nd/hw/gpio \
 	lk2nd/hw/i2c \
